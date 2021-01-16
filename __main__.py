@@ -1,13 +1,16 @@
-import Agent
+from Agent.agent import Agent
+from lcztools import LeelaBoard
 import Vision
 import Robot 
-import chess
 
 
 def main():
 
-    board = chess.Board()
+    board = LeelaBoard()
     agent = Agent()
+
+    
+    '''
     vision = Vision()
     robot = Robot()
 
@@ -29,7 +32,7 @@ def main():
         # before move was made, 1 taken after and a list of 
         # all the possible moves they could've made 
 
-        possible_moves = chess.generate_legal_moves()
+        possible_moves = board.generate_legal_moves()
         player_move = vision.model.predict(state0, state1, possible_moves)
 
         # Make player move on internal board
@@ -46,6 +49,7 @@ def main():
         
         state0 = robot.camera.get_image() 
 
+'''
 
 
 if __name__ == '__main__':
