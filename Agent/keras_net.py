@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import numpy as np
 import yaml
 from . import tfprocess
@@ -14,7 +12,6 @@ class KerasNet:
             cfg = f.read()
 
         cfg = yaml.safe_load(cfg)
-        print(yaml.dump(cfg, default_flow_style=False))
 
         tfp = tfprocess.TFProcess(cfg, gpu=True)
         tfp.init_net_v2()
@@ -26,6 +23,14 @@ class KerasNet:
         e_x = np.exp((x - np.max(x))/softmax_temp)
         return e_x / e_x.sum(axis=0)
 
+    def get_policy(self, leela_board):
+        
+        input_planes = leela_board.lcz_features()
+        model_input = input_planes.reshape(1, 112, 64)
+        model_output = self.model.predict(model_input)
+        policy = model_output[0][0]
+
+        return self._softmax(policy)
 
 
     def _evaluate(self, leela_board):
@@ -51,3 +56,12 @@ class KerasNet:
 
         return policy_legal
 
+    def get_move(self, board):
+
+        move_dict = self._evaluate(board)
+        
+        for k, v in move_dict.items():
+            move = k
+            break
+
+        return move 
