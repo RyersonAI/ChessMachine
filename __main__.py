@@ -8,13 +8,10 @@ def main():
 
     board = LeelaBoard()
     agent = Agent()
-
-    
-    '''
     vision = Vision()
     robot = Robot()
 
-    state0 = vision.initial_state 
+    state0 = vision.initial_state # state is np array of shape (height, width, color_channels)
 
     # Main game loop 
 
@@ -31,9 +28,10 @@ def main():
         # Determine move made by player using 2 images, 1 taken
         # before move was made, 1 taken after and a list of 
         # all the possible moves they could've made 
+        #possible_moves = board.generate_legal_moves()
 
-        possible_moves = board.generate_legal_moves()
-        player_move = vision.model.predict(state0, state1, possible_moves)
+
+        player_move = vision.model.predict(state0, state1)
 
         # Make player move on internal board
         board.move(player_move)
@@ -49,7 +47,7 @@ def main():
         
         state0 = robot.camera.get_image() 
 
-'''
+
 
 
 if __name__ == '__main__':

@@ -59,7 +59,7 @@ class KerasNet:
     def get_move(self, board):
 
         move_dict = self._evaluate(board)
-        
+    
         for k, v in move_dict.items():
             move = k
             break
