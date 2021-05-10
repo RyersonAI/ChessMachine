@@ -1,9 +1,9 @@
 from lcztools import load_network, LeelaBoard
-from keras_net import KerasNet
-import policy_index 
+from . import kerasNet
+from . import policy_index 
 
 
-net = KerasNet()
+net = kerasNet.KerasNet()
 board = LeelaBoard()
 
 

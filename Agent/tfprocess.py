@@ -160,11 +160,13 @@ class TFProcess:
             'renorm_momentum', 0.99)
             
         if gpu:
+            
             gpus = tf.config.experimental.list_physical_devices('GPU')
             tf.config.experimental.set_visible_devices(gpus[self.cfg['gpu']],
                                                     'GPU')
             tf.config.experimental.set_memory_growth(gpus[self.cfg['gpu']], True)
-        
+           
+            pass
         if self.model_dtype == tf.float16:
             tf.keras.mixed_precision.experimental.set_policy('mixed_float16')
 

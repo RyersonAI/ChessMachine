@@ -1,4 +1,4 @@
-from Agent.agent import Agent
+from Agent.kerasNet import KerasNet
 from lcztools import LeelaBoard
 import Vision
 import Robot 
@@ -6,20 +6,28 @@ import Robot
 
 def main():
 
+
     board = LeelaBoard()
-    agent = Agent()
+    agent = KerasNet()
+
+    '''
     vision = Vision()
     robot = Robot()
 
-    state0 = vision.initial_state # state is np array of shape (height, width, color_channels)
 
+    # Take inital image of the board 
+    # state is np array of shape (height, width, color_channels)
+    state0 = robot.camera.get_image()
+    
     # Main game loop 
 
     while True:
 
         # Wait for player to make a move
+
         while True:
 
+            #TODO Figure out how to use button with pi 
             if robot.clock.player_pressed:
                 break
 
@@ -27,6 +35,7 @@ def main():
 
         # Determine move made by player using 2 images, 1 taken
         # before move was made, 1 taken after and a list of 
+
         # all the possible moves they could've made 
         #possible_moves = board.generate_legal_moves()
 
@@ -37,7 +46,7 @@ def main():
         board.move(player_move)
 
         # Determine the move to make in response 
-        agent_move = agent.model.predict(board)
+        agent_move = agent.get_move(board, strengh=1)
 
         # Make agent move on internal board
         board.move(agent_move)
@@ -47,6 +56,7 @@ def main():
         
         state0 = robot.camera.get_image() 
 
+'''
 
 
 
