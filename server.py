@@ -1,14 +1,17 @@
 from ChessAgent import Agent
 from ChessVision import Vision
-import sockets 
+import socket
 
 
+HOST = 'localhost'
+PORT = 65432
 
 def main():
 
 
     agent = Agent()
     vision = Vision() 
+
 
     
 
