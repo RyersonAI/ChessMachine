@@ -4,3 +4,9 @@
 [submodule "ChessAgent"]
 	path = ChessAgent
 	url = https://github.com/RyersonAI/ChessAgent
+[submodule "ChessRobot"]
+	path = ChessRobot
+	url = https://github.com/RyersonAI/ChessRobot.git
+[submodule "ChessVision"]
+	path = ChessVision
+	url = https://github.com/RyersonAI/ChessVision.git
