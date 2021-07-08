@@ -1,3 +1,6 @@
 [submodule "lczero_tools"]
 	path = lczero_tools
 	url = https://github.com/so-much-meta/lczero_tools.git
+[submodule "ChessAgent"]
+	path = ChessAgent
+	url = https://github.com/RyersonAI/ChessAgent
