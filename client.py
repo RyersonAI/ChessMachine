@@ -1,45 +1,43 @@
 
-import Robot 
 import socket
+import pickle as pkl 
+import numpy as np 
 
+HOST = socket.gethostname()
+PORT = 65433
+HEADERSIZE = 10
 
-def get_action():
+class client:
 
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect('localhost', 80)
+    def __init__(self):
 
-    
-def main():
-    
-    robot = Robot()
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.connect((HOST, PORT))
 
-    #TODO connect to remote machine using sockets
+    def get_board(self, img):
 
-    while True:
+        msg = pkl.dumps(img)
+        msg = bytes(f'{len(msg):<{HEADERSIZE}}', 'utf-8') + msg
 
-        # Wait for player to make a move
+        self.s.send(msg)
+
+        full_msg = ''
+        new_msg = True 
 
         while True:
 
-            #TODO Figure out how to use button with pi 
-            if robot.clock.player_pressed:
-                break
+            msg = self.s.recv(16)
 
-        board_image = robot.camera.get_image()
+            if new_msg:
 
-        # all the possible moves they could've made 
-        #possible_moves = board.generate_legal_moves()
+                msg_len = int(msg[:HEADERSIZE])
+                new_msg = False 
 
-        action = get_action(board_image)
+            full_msg += msg 
 
-        # Make the agent move on the physical board
-        robot.arm.make_move(action)
-        
-       
-
-
-
-
-if __name__ == '__main__':
-
-    main()
+            if len(full_msg)-HEADERSIZE == msg_len:
+                response = pkl.loads(full_msg)
+                break 
+    
+            
+        return response 
